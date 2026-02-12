@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 import '../globals.css';
-import { Header } from '@/components/layout/Header';
+import { Header } from '@/components/layout/header/Header';
 import { Footer } from '@/components/layout/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';

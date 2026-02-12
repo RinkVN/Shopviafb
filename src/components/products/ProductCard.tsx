@@ -1,86 +1,186 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Product } from "@/features/products/types";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import type { Product } from '@/features/products/types';
 
 interface ProductCardProps {
   product: Product;
   ctaLabel?: string;
 }
 
-export function ProductCard({
-  product,
-  ctaLabel = "Mua ngay",
-}: ProductCardProps) {
-  const badgeVariant =
-    product.badge?.toLowerCase().includes("hot") ||
-    product.badge?.toLowerCase().includes("new")
-      ? "hot"
-      : "sale";
-
+export function ProductCard({ product, ctaLabel = 'Mua ngay' }: ProductCardProps) {
   return (
-    <Link href={`/products/${product.slug}`} className="group block">
-      <Card className="flex h-full flex-col overflow-hidden rounded-2xl border-slate-100/80 bg-gradient-to-b from-white to-slate-50/80 shadow-[0_16px_40px_rgba(15,23,42,0.08)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(15,23,42,0.16)]">
-        <div className="relative h-32 w-full overflow-hidden bg-slate-900">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-cover transition duration-300 group-hover:scale-105 group-hover:opacity-95"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/40 to-transparent" />
-          {product.badge && (
-            <Badge
-              variant={badgeVariant}
-              className="absolute left-2 top-2 shadow-sm shadow-red-500/30"
-            >
-              {product.badge}
-            </Badge>
-          )}
-        </div>
-        <CardContent className="flex flex-1 flex-col gap-1.5 px-3 py-2.5">
-          <p className="line-clamp-2 text-[13px] font-semibold leading-snug text-slate-900">
-            {product.name}
-          </p>
-          
-          {/* Rating Stars */}
-          <div className="flex items-center gap-1">
-            <div className="flex items-center">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <svg
-                  key={star}
-                  className="h-3 w-3 text-yellow-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span className="text-[10px] text-slate-500">
-              ({Math.floor(Math.random() * 500 + 50)})
-            </span>
-          </div>
+    <div
+      className="rounded-lg bg-card text-card-foreground group overflow-hidden border-2 
+      border-[rgba(255,191,0.)] shadow-lg hover:shadow-2xl hover:border-[rgba(255,191,0.4)]
+       transition-all duration-500 animate-fade-in bg-gradient-to-br from-white
+       hover:-translate-y-1"
+      style={{ animationDelay: '80ms' }}
+    >
+      <div className="relative overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full aspect-square object-cover group-hover:scale-110 transition-transform 
+          duration-700"
+        />
 
-          <p className="text-[11px] font-semibold text-emerald-600">
-            {product.price.toLocaleString("vi-VN")}đ{" "}
+        {/* Discount badge */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+          <div
+            className="inline-flex items-center rounded-full transition-colors focus:outline-none 
+          focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:bg-primary/80 bg-[rgba(212,17,17,0.8)] text-white 
+          text-sm font-black px-3 py-1 shadow-lg border border-[rgba(255,191,0.4)]"
+          >
+            🧧 -10%
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-3 ">
+        <h3
+          className="font-semibold text-foreground line-clamp-2 min-h-[44px] 
+        group-hover:text-[rgba(212,17,17)] transition-colors text-sm md:text-base"
+        >
+          {product.name}
+        </h3>
+
+        {/* Price + saving */}
+        <div className="space-y-1">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="text-xl md:text-2xl font-black text-[rgba(212,17,17)]">
+              {product.price.toLocaleString('vi-VN')} ₫
+            </span>
             {product.originalPrice && (
-              <span className="ml-1 text-[10px] font-normal text-slate-400 line-through">
-                {product.originalPrice.toLocaleString("vi-VN")}đ
+              <span className="text-xs md:text-sm text-muted-foreground line-through">
+                {product.originalPrice.toLocaleString('vi-VN')} ₫
               </span>
             )}
-          </p>
-          <p className="text-[10px] text-slate-400">
-            Đã bán {product.sold.toLocaleString("vi-VN")}
-          </p>
-          <Button size="sm" className="mt-1 self-stretch rounded-full">
-            {ctaLabel}
-          </Button>
-        </CardContent>
-      </Card>
-    </Link>
+          </div>
+
+          {product.originalPrice && (
+            <div className="text-xs text-green-600 font-medium flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-trending-up w-3 h-3"
+              >
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+              <span>
+                Tiết kiệm {(product.originalPrice - product.price).toLocaleString('vi-VN')} ₫
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1">
+          <div className="flex">
+            {[1, 2, 3, 4].map((star) => (
+              <svg
+                key={star}
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-star w-3 h-3 text-tet-gold fill-tet-gold"
+              >
+                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+              </svg>
+            ))}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-star w-3 h-3 text-tet-gold fill-tet-gold/50"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+            </svg>
+          </div>
+          <span className="text-xs text-muted-foreground">4.7 (130)</span>
+        </div>
+
+        {/* Sold / progress */}
+        <div className="space-y-1.5">
+          <div className="flex justify-between text-xs">
+            <span className="text-muted-foreground flex items-center gap-1">
+              <span>Đã bán: {product.sold.toLocaleString('vi-VN')}</span>
+            </span>
+            <span className="text-muted-foreground">Sắp cháy hàng</span>
+          </div>
+
+          <div className="relative w-full bg-muted rounded-full h-2.5 overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r 
+              from-destructive to-orange-500"
+              style={{ width: '60%' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+          </div>
+        </div>
+
+        {/* CTA */}
+        <Link
+          href={`/products/${product.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group/btn"
+        >
+          <div className="relative bg-[rgba(212,17,17)] rounded-md border border-[rgba(255,191,0.4)]">
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md 
+            text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 
+            focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none 
+            disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 
+            bg-primary hover:bg-primary/90 h-10 px-4 py-2 bg-gradient-to-r from-[rgba(212,17,17,0.8)] via-red-600 
+            to-[rgba(212,17,17,0.8)] hover:from-[rgba(212,17,17,0.8)] hover:via-[rgba(212,17,17,0.8)] hover:to-[rgba(212,17,17,0.8)] text-white font-bold 
+            shadow-lg hover:shadow-xl hover:shadow-[rgba(212,17,17,0.3)] transition-all duration-300 hover:scale-105 
+            relative overflow-hidden border-2 border-tet-gold/50 hover:animate-[firework-glow_0.5s_ease-in-out_infinite]
+             w-full gap-2"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-[rgba(255,191,0.4)]/0 
+              via-[rgba(255,191,0.4)]/30 to-[rgba(255,191,0.4)]/0 -translate-x-full 
+              group-hover/btn:translate-x-full transition-transform duration-700" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-shopping-cart w-4 h-4 group-hover/btn:animate-bounce 
+                relative z-10"
+              >
+                <circle cx="8" cy="21" r="1" />
+                <circle cx="19" cy="21" r="1" />
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+              </svg>
+              <span className="relative z-10">{ctaLabel}</span>
+            </button>
+          </div>
+        </Link>
+      </div>
+    </div>
   );
 }
-

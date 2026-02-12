@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import CoinIcon from '../icons/coin.svg';
-import GiftBagIcon from '../icons/gift-bag.svg';
-import LanternIcon from '../icons/lantern.svg';
-import Lantern1Icon from '../icons/lantern_1.svg';
+import CoinIcon from '../assets/icons/coin.svg';
+import GiftBagIcon from '../assets/icons/gift-bag.svg';
+import LanternIcon from '../assets/icons/lantern.svg';
+import Lantern1Icon from '../assets/icons/lantern_1.svg';
 
 export default function Items() {
   return (

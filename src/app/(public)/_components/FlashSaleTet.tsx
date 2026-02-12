@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import CountdownInBoxes from '@/components/layout/CountdownInBoxes';
 
-import SparkleIcon from '../icons/sparkle.svg';
+import SparkleIcon from '../assets/icons/sparkle.svg';
 import Items from './Items';
 
 
