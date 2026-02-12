@@ -11,7 +11,7 @@ export const productsMock: Product[] = [
     originalPrice: 527000,
     sold: 20925,
     badge: "-47%",
-    image: "/assets/cursor-ai.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "2",
@@ -22,7 +22,7 @@ export const productsMock: Product[] = [
     originalPrice: 320000,
     sold: 10234,
     badge: "-53%",
-    image: "/assets/gamma-ai.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "3",
@@ -33,7 +33,7 @@ export const productsMock: Product[] = [
     originalPrice: 499000,
     sold: 18902,
     badge: "HOT",
-    image: "/assets/youtube-premium.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "4",
@@ -44,7 +44,7 @@ export const productsMock: Product[] = [
     originalPrice: 599000,
     sold: 17001,
     badge: "-38%",
-    image: "/assets/chatgpt-plus.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "5",
@@ -54,7 +54,7 @@ export const productsMock: Product[] = [
     price: 98000,
     originalPrice: 150000,
     sold: 9580,
-    image: "/assets/spotify-premium.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "6",
@@ -65,7 +65,7 @@ export const productsMock: Product[] = [
     originalPrice: 310000,
     sold: 7120,
     badge: "-51%",
-    image: "/assets/higgsfield-ai.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "7",
@@ -76,7 +76,7 @@ export const productsMock: Product[] = [
     originalPrice: 280000,
     sold: 5340,
     badge: "NEW",
-    image: "/assets/grok-ai.png",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: "8",
@@ -86,7 +86,7 @@ export const productsMock: Product[] = [
     price: 120000,
     originalPrice: 240000,
     sold: 6200,
-    image: "/assets/capcut-pro.png",
+    image: "https://picsum.photos/200/300",
   },
 ];
 
