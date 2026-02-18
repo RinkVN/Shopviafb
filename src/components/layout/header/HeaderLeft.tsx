@@ -5,7 +5,7 @@ export default function HeaderLeft() {
   return (
     <div className="flex items-center gap-2">
       <Link
-        href="/gioi-thieu"
+        href="/about"
         className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
       >
         <Image src="/assets/icons/info.png" alt="Giới thiệu" width={20} height={20} />

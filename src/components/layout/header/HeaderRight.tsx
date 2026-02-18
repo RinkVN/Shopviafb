@@ -1,39 +1,37 @@
-import Link from 'next/link';
-import { Heart, ShoppingCart, UserRound } from 'lucide-react';
+"use client";
+
+import Link from "next/link";
+import { ShoppingCart, UserRound } from "lucide-react";
+import { useCartStore } from "@/stores/cart-store";
+import { CartPopup } from "./CartPopup";
 
 export default function HeaderRight() {
+  const totalCount = useCartStore((s) => s.totalCount());
+  const count = totalCount;
+
   return (
     <div className="flex items-center gap-2">
-      {/* Wishlist */}
-      <div className="flex items-center gap-2">
-        <Link
-          href="/wishlist"
-          className="relative flex items-center rounded-lg px-3 py-1.5 text-slate-700 hover:bg-slate-100"
-        >
-          <Heart />
-          <span className="absolute right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-semibold text-white">
-            0
-          </span>
-        </Link>
-      </div>
-
       {/* Cart */}
       <div className="flex items-center gap-2">
-        <Link
-          href="/cart"
-          className="relative flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
-        >
-          <ShoppingCart />
-          <span className="absolute right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-semibold text-white">
-            0
-          </span>
-        </Link>
+        <CartPopup>
+          <Link
+            href="/cart"
+            className="relative flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+          >
+            <ShoppingCart />
+            {count > 0 && (
+              <span className="absolute right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-semibold text-white">
+                {count > 99 ? "99+" : count}
+              </span>
+            )}
+          </Link>
+        </CartPopup>
       </div>
 
       {/* User Account */}
       <div className="flex items-center gap-2">
         <Link
-          href="/(auth)/login"
+          href="/login"
           className="hidden items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 md:flex"
         >
           <UserRound />

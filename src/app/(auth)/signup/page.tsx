@@ -1,9 +1,10 @@
 "use client";
+
 import { useRef } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import { LoginForm } from "@/components/auth/login-form";
+import { SignupForm } from "@/components/auth/signup-form";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const formRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -12,8 +13,9 @@ export default function LoginPage() {
       extraCollisionRefs={[formRef]}
     >
       <div ref={formRef}>
-        <LoginForm />
+        <SignupForm />
       </div>
     </BackgroundBeamsWithCollision>
   );
 }
+
