@@ -1,5 +1,5 @@
 type ProductPriceBlockProps = {
-  price: string;
+  price?: string;
   originalPrice?: string;
   saveAmount?: string;
   soldCount?: string;
